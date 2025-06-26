@@ -7,7 +7,7 @@ const Reviews = async () => {
     const data = await fetchReviews()
 
     return (
-        <section className="w-full mt-8 flex gap-8">
+        <section className="w-full grid grid-cols-1 mt-8 flex gap-4 md:grid-cols-2 lg:grid-cols-3">
             {
                 data
                     ?
@@ -17,13 +17,14 @@ const Reviews = async () => {
                         const title = match?.[1] || ''
                         const content = match?.[2] || ''
 
-                            return (
-                                    <CardReview
-                                        id={review.id}
-                                        title={title}
-                                        content={content}
-                                    />
-                                )
+                        return (
+                            <CardReview
+                                key={review.id}
+                                id={review.id}
+                                title={title}
+                                content={content}
+                            />
+                        )
                     })
                     :
                     (

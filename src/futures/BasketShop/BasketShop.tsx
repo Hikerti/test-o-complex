@@ -1,5 +1,4 @@
-import {ProductSendForm} from "@/widgets";
-import {ProductsListBasket} from "@/entites";
+import {ProductSendForm, ProductsListBasket} from "@/widgets";
 
 const BasketShop = () => {
     return (
