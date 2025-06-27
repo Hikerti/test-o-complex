@@ -3,22 +3,25 @@
 import {Card, CardContent, CardFooter, CardHeader} from "@/components/ui/card";
 import React, {FC, useState} from "react";
 import {CardProductProps} from "@/entites/Cards/interface/interface";
-import {IncrementCount} from "@/entites/Cards/functions/IncrementCount";
-import {MinusCount} from "@/entites/Cards/functions/MinusCount";
+import {ButtonBuy} from "@/shared";
+import ButtonProduct from "@/shared/ui/Buttons/buttonProduct";
+import useSetProduct from "@/widgets/hooks/useSetProduct";
 
 const CardProduct: FC<CardProductProps> = ({id, price, title, image_url, description}) => {
-
     const [active, setActive] = useState<boolean>(true);
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(1);
+
+    useSetProduct({id, active, count, title, image_url, description, price, setActive});
 
     return (
-            <Card key={id} className='bg-zinc-200'>
+            <Card key={id} className='w-[380px] bg-zinc-200'>
                 <CardHeader>
                     <img
                         src={image_url}
                         alt='image_product'
-                        width={'100%'}
-                        height={200}
+                        className='bg-white'
+                        width={330}
+                        height={250}
                     />
                 </CardHeader>
                 <CardContent className='h-[400px] flex flex-col justify-between'>
@@ -33,29 +36,17 @@ const CardProduct: FC<CardProductProps> = ({id, price, title, image_url, descrip
                         active
                             ?
                             (
-                                <button
-                                    className='w-full h-full bg-zinc-900 p-4 text-white rounded-xl hover:bg-zinc-800'
-                                    onClick={() => setActive(false)}
-                                >
-                                    Купить
-                                </button>
+                                <ButtonBuy
+                                    setActive={setActive}
+                                />
                             )
                             : (
-                                <div className='w-full h-full flex gap-4 text-white'>
-                                    <button
-                                        className='bg-zinc-900 px-6 py-4 rounded-xl'
-                                        onClick={() => {
-                                            MinusCount({setCount, action: 'minus', count})
-                                        }}
-                                    >-</button>
-                                    <button className='w-full bg-zinc-900 rounded-xl'>{count}</button>
-                                    <button
-                                        className='bg-zinc-900 px-6 py-4 rounded-xl'
-                                        onClick={() => {
-                                            IncrementCount({setCount, action: 'plus', count})
-                                        }}
-                                    >+</button>
-                                </div>
+                                <ButtonProduct
+                                    setCount={setCount}
+                                    count={count}
+                                    id={id}
+                                    setActive={setActive}
+                                />
                             )
                     }
                 </CardFooter>

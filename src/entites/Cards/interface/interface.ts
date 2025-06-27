@@ -9,7 +9,10 @@ export interface CardReviewProps {
 export interface IncrementAndMinusCount {
     count: number
     setCount: (count: number) => void
-    action: string
+    action: 'plus' | 'minus'
 }
 
-export interface CardProductProps  extends ProductData {}
+export interface CardProductProps extends ProductData {}
+export interface CardBasketProductProps extends ProductData {
+    count: number
+}

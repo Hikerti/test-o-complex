@@ -12,3 +12,15 @@ export interface ProductsResponse {
     total: number
     items: ProductData[]
 }
+
+export interface ProductStoreData extends ProductData {
+    count: number;
+}
+
+export interface useProductStoreProps {
+    products: ProductStoreData[];
+
+    setProduct: (productsData: ProductStoreData) => void;
+    updateCountProduct: (id: number, count: number) => void;
+    deleteProduct: (id: number) => void;
+}
